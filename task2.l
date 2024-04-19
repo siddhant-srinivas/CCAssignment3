@@ -49,16 +49,17 @@ INVERTEDC \"
 {ARITHMETIC_OPERATOR}   { printf("%s\n", yytext); return ARITHOP; }
 =           { return EQUALSTO; }
 {RELATIONAL_OPERATOR}   { printf("%s\n", yytext); return RELOP; }
-{INVERTEDC}{STATEMENT}{INVERTEDC} { return STRINGCONT; }
+{INVERTEDC}{STATEMENT}{INVERTEDC} { printf("%s\n", yytext); return STRINGCONT; }
 ;           { printf("%s\n", yytext);  return SEMICOL;}
 "."         { return FULLSTOP; }
 :           { return COL; }
 "("         { return OPENBRACK; }
-")"         { return CLOSEBRACK; }
+")"         { printf("%s\n", yytext); return CLOSEBRACK; }
 ,           { return COMMA; }
 "["         { return OPENSQBRACK; }
 "]"         { return CLOSESQBRACK; }
 
-.|\n        {;}
+[ \t\n]     {;}
+.           {return ERR;}
 
 %%

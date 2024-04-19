@@ -22,7 +22,7 @@
     void yyerror(const char *str);
 %}
 
-%token PROGRAM DATATYPES VAR TO DOWNTO IF THEN ELSE ARRAY WHILE WRITE READ FOR DO BEG END OF DNUMBER FNUMBER VARIABLE ARITHOP RELOP BOOLOP STRINGCONT SEMICOL FULLSTOP COL OPENBRACK CLOSEBRACK COMMA OPENSQBRACK CLOSESQBRACK EQUALSTO
+%token PROGRAM DATATYPES VAR TO DOWNTO IF THEN ELSE ARRAY WHILE WRITE READ FOR DO BEG END OF DNUMBER FNUMBER VARIABLE ARITHOP RELOP BOOLOP STRINGCONT SEMICOL FULLSTOP COL OPENBRACK CLOSEBRACK COMMA OPENSQBRACK CLOSESQBRACK EQUALSTO ERR
 
 %%
 
@@ -117,8 +117,15 @@ boolean_condition   :   boolean_condition BOOLOP boolean
                     |   boolean
                     ;
 
-write_statement     :   WRITE OPENBRACK STRINGCONT CLOSEBRACK SEMICOL
-                    |   WRITE OPENBRACK declaration_list CLOSEBRACK SEMICOL
+write_statement     :   WRITE OPENBRACK content_list CLOSEBRACK SEMICOL
+                    ;
+
+content_list        :   content_list COMMA content_unit
+                    |   content_unit
+                    ;
+
+content_unit        :   expression
+                    |   STRINGCONT
                     ;
 
 read_statement      :   READ OPENBRACK varinstance CLOSEBRACK SEMICOL
@@ -132,6 +139,8 @@ for_statement       :   FOR VARIABLE COL EQUALSTO expression TO expression DO BE
                     |   FOR VARIABLE COL EQUALSTO expression DOWNTO expression DO BEG CODEBLOCK END SEMICOL
                     ;
 
+err     :   ERR {yyerror("Suntax error");}
+        ;
 %%
 
 

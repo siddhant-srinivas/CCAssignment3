@@ -1,17 +1,21 @@
-program Example9;
+program MaxValueArray;
 var
-  i: Integer;
+  numbers: array[1..10] of Integer;
+  i, maxValue: Integer;
 begin
-  i := 10;
-  if i > 10 then
+  write("Enter 10 integer values:");
+  for i := 1 to 10 do
   begin
-    i := 10;
-    i := i - 1;
-    write(i);
-  end
-  else
-  begin
-    i := 20;
-    write(i);
+    read(numbers[i]);
   end;
+  maxValue := numbers[1];
+  for i := 2 to 10 do
+  begin
+    if numbers[i] > maxValue then
+    begin
+      maxValue := numbers[i];
+    end;
+  end;
+  write("The maximum value is: ");  
+  write(maxValue);
 end.

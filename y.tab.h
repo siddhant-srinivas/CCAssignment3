@@ -71,7 +71,8 @@
      COMMA = 287,
      OPENSQBRACK = 288,
      CLOSESQBRACK = 289,
-     EQUALSTO = 290
+     EQUALSTO = 290,
+     ERR = 291
    };
 #endif
 /* Tokens.  */
@@ -108,6 +109,7 @@
 #define OPENSQBRACK 288
 #define CLOSESQBRACK 289
 #define EQUALSTO 290
+#define ERR 291
 
 
 

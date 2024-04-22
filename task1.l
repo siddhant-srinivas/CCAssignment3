@@ -15,12 +15,16 @@ OPERATOR    (\+|\-|\*|\/|=|:=|<|>|<=|>=|<>|%|AND|OR|NOT)
 KEYWORD     (program|integer|real|boolean|char|var|to|downto|if|else|while|write|read|for|do|array|and|or|not|begin|end|of)
 PUNCTUATOR  ";"|":"|"("|")"|","|"."|"["|"]"
 STATEMENT   [^\"\n]*
+STATEMENT1  [^\n]*
 %x IN_QUOTES
+%x COMMENT
 
 %%
 [ \t] {;}
 [\n] {yyline.lineno++; }
-"//"    {;}
+"//"    {BEGIN COMMENT;}
+<COMMENT>\n {yyline.lineno++; BEGIN INITIAL;}
+<COMMENT>{STATEMENT1} {printf("%d\t %s\t comment\n", yyline.lineno, yytext);}
 {OPERATOR} {printf("%d\t %s\t operator\n", yyline.lineno, yytext); }
 "end." {printf("%d\t end\t keyword\n", yyline.lineno);
 	printf("%d\t .\t puntuator\n", yyline.lineno);

@@ -4,6 +4,7 @@ var
   i, maxValue: Integer;
 begin
   write("Enter 10 integer values:");
+  // This is an example
   for i := 1 to 10 do
   begin
     read(numbers[i]);

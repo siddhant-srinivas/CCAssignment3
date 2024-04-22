@@ -40,6 +40,7 @@ INVERTEDC \"
 "else"      { return ELSE; }
 "while"     { return WHILE; }
 "write"     { return WRITE; }
+"writeln"   { return WRITE; }
 "read"      { return READ; }
 "for"       { return FOR; }
 "do"        { return DO; }

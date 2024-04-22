@@ -850,7 +850,7 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 31 "task2.l"
-{printf("%d\t %s\t comment\n", yyline.lineno, yytext);}
+{;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
@@ -895,17 +895,17 @@ YY_RULE_SETUP
 case 12:
 YY_RULE_SETUP
 #line 41 "task2.l"
-{ printf("%s\n", yytext); return WHILE; }
+{ return WHILE; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
 #line 42 "task2.l"
-{ printf("%s\n", yytext); return WRITE; }
+{ return WRITE; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 43 "task2.l"
-{ printf("%s\n", yytext); return READ; }
+{ return READ; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
@@ -925,12 +925,12 @@ YY_RULE_SETUP
 case 18:
 YY_RULE_SETUP
 #line 47 "task2.l"
-{ printf("%s\n", yytext); return BEG; }
+{ return BEG; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 48 "task2.l"
-{ printf("%s\n", yytext); return END; }
+{ return END; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
@@ -940,7 +940,7 @@ YY_RULE_SETUP
 case 21:
 YY_RULE_SETUP
 #line 50 "task2.l"
-{ printf("%s\n", yytext);  return DNUMBER;}
+{ return DNUMBER;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
@@ -955,12 +955,12 @@ YY_RULE_SETUP
 case 24:
 YY_RULE_SETUP
 #line 53 "task2.l"
-{ printf("%s\n", yytext); return VARIABLE;}
+{ return VARIABLE;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 54 "task2.l"
-{ printf("%s\n", yytext); return ARITHOP; }
+{ return ARITHOP; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
@@ -970,17 +970,17 @@ YY_RULE_SETUP
 case 27:
 YY_RULE_SETUP
 #line 56 "task2.l"
-{ printf("%s\n", yytext); return RELOP; }
+{ return RELOP; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 57 "task2.l"
-{ printf("%s\n", yytext); return STRINGCONT; }
+{ return STRINGCONT; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 58 "task2.l"
-{ printf("%s\n", yytext);  return SEMICOL;}
+{ return SEMICOL;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
@@ -1000,7 +1000,7 @@ YY_RULE_SETUP
 case 33:
 YY_RULE_SETUP
 #line 62 "task2.l"
-{ printf("%s\n", yytext); return CLOSEBRACK; }
+{ return CLOSEBRACK; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP

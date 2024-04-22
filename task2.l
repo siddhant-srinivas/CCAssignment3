@@ -28,7 +28,7 @@ INVERTEDC \"
 
 "//"    {BEGIN COMMENT;}
 <COMMENT>\n {BEGIN INITIAL;}
-<COMMENT>{STATEMENT1} {printf("%s\t comment\n"yytext);}
+<COMMENT>{STATEMENT1} {;}
 
 "program"   { return PROGRAM; }
 "integer"|"real"|"boolean"|"char"   { return DATATYPES; }   
@@ -38,28 +38,28 @@ INVERTEDC \"
 "if"        { return IF; }
 "then"      { return THEN; }
 "else"      { return ELSE; }
-"while"     { printf("%s\n", yytext); return WHILE; }
-"write"     { printf("%s\n", yytext); return WRITE; }
-"read"      { printf("%s\n", yytext); return READ; }
+"while"     { return WHILE; }
+"write"     { return WRITE; }
+"read"      { return READ; }
 "for"       { return FOR; }
 "do"        { return DO; }
 "array"     { return ARRAY; }
-"begin"     { printf("%s\n", yytext); return BEG; }
-"end"       { printf("%s\n", yytext); return END; }
+"begin"     { return BEG; }
+"end"       { return END; }
 "of"        { return OF; }
-{dNUMBER}   { printf("%s\n", yytext);  return DNUMBER;}
+{dNUMBER}   { return DNUMBER;}
 {fNUMBER}   { return FNUMBER;}
 {BOOLEAN_OPERATOR}   { return BOOLOP; }
-{IDENTIFIER} { printf("%s\n", yytext); return VARIABLE;}
-{ARITHMETIC_OPERATOR}   { printf("%s\n", yytext); return ARITHOP; }
+{IDENTIFIER} { return VARIABLE;}
+{ARITHMETIC_OPERATOR}   { return ARITHOP; }
 =           { return EQUALSTO; }
-{RELATIONAL_OPERATOR}   { printf("%s\n", yytext); return RELOP; }
-{INVERTEDC}{STATEMENT}{INVERTEDC} { printf("%s\n", yytext); return STRINGCONT; }
-;           { printf("%s\n", yytext);  return SEMICOL;}
+{RELATIONAL_OPERATOR}   { return RELOP; }
+{INVERTEDC}{STATEMENT}{INVERTEDC} { return STRINGCONT; }
+;           { return SEMICOL;}
 "."         { return FULLSTOP; }
 :           { return COL; }
 "("         { return OPENBRACK; }
-")"         { printf("%s\n", yytext); return CLOSEBRACK; }
+")"         { return CLOSEBRACK; }
 ,           { return COMMA; }
 "["         { return OPENSQBRACK; }
 "]"         { return CLOSESQBRACK; }

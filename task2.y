@@ -94,13 +94,12 @@ else_statement  :   ELSE BEG CODEBLOCK END SEMICOL
 
 condition   :   relation_condition
             |   boolean_condition  
-            |   OPENBRACK relation_condition CLOSEBRACK
-            |   OPENBRACK boolean_condition CLOSEBRACK 
+            |   OPENBRACK condition CLOSEBRACK
             ;
 
 varinstance     :   VARIABLE
                 |   VARIABLE OPENSQBRACK DNUMBER CLOSESQBRACK
-                |   VARIABLE OPENSQBRACK VARIABLE CLOSESQBRACK
+                |   VARIABLE OPENSQBRACK varinstance CLOSESQBRACK
                 ;
 
 relation_condition    :   expression relo expression
@@ -146,7 +145,7 @@ for_statement       :   FOR VARIABLE COL EQUALSTO expression TO expression DO BE
 
 void yyerror(const char *s) {
     syntaxErr = 1;
-    fprintf(stderr, "%s at line %d, column %d\n", s, yylineno, yyleng);
+    fprintf(stderr, "%s\n", s);
 }
 
 int main(int argc, char *argv[]) {

@@ -93,7 +93,9 @@ else_statement  :   ELSE BEG CODEBLOCK END SEMICOL
                 ;
 
 condition   :   relation_condition
-            |   boolean_condition   
+            |   boolean_condition  
+            |   OPENBRACK relation_condition CLOSEBRACK
+            |   OPENBRACK boolean_condition CLOSEBRACK 
             ;
 
 varinstance     :   VARIABLE
@@ -112,7 +114,7 @@ boolean     :   OPENBRACK relation_condition CLOSEBRACK
             |       relation_condition
             ;
 
-boolean_condition   :   boolean_condition BOOLOP boolean
+boolean_condition   :   boolean BOOLOP boolean_condition
                     |   varinstance COL EQUALSTO boolean_condition
                     |   boolean
                     ;
@@ -131,16 +133,13 @@ content_unit        :   expression
 read_statement      :   READ OPENBRACK varinstance CLOSEBRACK SEMICOL
                     ;
 
-while_statement     :   WHILE OPENBRACK condition CLOSEBRACK DO BEG CODEBLOCK END SEMICOL
-                    |   WHILE condition DO BEG CODEBLOCK END SEMICOL
+while_statement     :   WHILE condition DO BEG CODEBLOCK END SEMICOL
                     ;
 
 for_statement       :   FOR VARIABLE COL EQUALSTO expression TO expression DO BEG CODEBLOCK END SEMICOL
                     |   FOR VARIABLE COL EQUALSTO expression DOWNTO expression DO BEG CODEBLOCK END SEMICOL
                     ;
 
-err     :   ERR {yyerror("Suntax error");}
-        ;
 %%
 
 
@@ -150,8 +149,12 @@ void yyerror(const char *s) {
     fprintf(stderr, "%s at line %d, column %d\n", s, yylineno, yyleng);
 }
 
-int main() {
-    yyin = fopen("input.pas", "r"); 
+int main(int argc, char *argv[]) {
+    if(argc != 2){
+        printf("Pass the input file as: %s <input_file>, \n", argv[0]);
+        return 1;
+    }
+    yyin = fopen(argv[1], "r"); 
     if(yyin == NULL) {
         printf("Error opening input file.\n");
         return 1;

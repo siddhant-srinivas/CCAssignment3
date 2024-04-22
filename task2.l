@@ -19,11 +19,16 @@ BOOLEAN_OPERATOR       (and|or|not)
 KEYWORD     (program|integer|real|boolean|char|var|to|downto|if|else|while|write|read|for|do|array|begin|end|of)
 PUNCTUATOR  ";"|":"|"("|")"|","|"."|"["|"]"
 STATEMENT   [^\"\n]*
+STATEMENT1  [^\n]*
 INVERTEDC \"
 
 %x IN_QUOTES
-
+%x COMMENT
 %%
+
+"//"    {BEGIN COMMENT;}
+<COMMENT>\n {BEGIN INITIAL;}
+<COMMENT>{STATEMENT1} {printf("%s\t comment\n"yytext);}
 
 "program"   { return PROGRAM; }
 "integer"|"real"|"boolean"|"char"   { return DATATYPES; }   
@@ -60,6 +65,5 @@ INVERTEDC \"
 "]"         { return CLOSESQBRACK; }
 
 [ \t\n]     {;}
-.           {return ERR;}
-
+.           {}
 %%
